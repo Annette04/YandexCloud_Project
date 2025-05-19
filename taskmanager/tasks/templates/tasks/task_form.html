@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+        {{ form.author_name.label_tag }}
+        {{ form.author_name }}
+        {% if form.author_name.errors %}
+        <div class="invalid-feedback d-block">
+            {{ form.author_name.errors }}
+        </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.title.label_tag }}
+        {{ form.title }}
+        {% if form.title.errors %}
+        <div class="invalid-feedback d-block">
+            {{ form.title.errors }}
+        </div>
+        {% endif %}
+    </div>
+    <div class="mb-3">
+        {{ form.description.label_tag }}
+        {{ form.description }}
+        {% if form.description.errors %}
+        <div class="invalid-feedback d-block">
+            {{ form.description.errors }}
+        </div>
+        {% endif %}
+    </div>
+    <div class="mb-3 form-check">
+        {{ form.is_completed }}
+        {{ form.is_completed.label_tag }}
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'task_list' %}" class="btn btn-secondary">Отмена</a>
+</form>
+{% endblock %}
