@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'task_create' %}" class="btn btn-primary">Создать новую задачу</a>
+</div>
+
+<form method="get" class="mb-4">
+    <div class="input-group">
+        <input type="text" name="author_name" class="form-control" placeholder="Фильтр по имени автора" value="{{ author_name }}">
+        <button type="submit" class="btn btn-outline-secondary">Фильтровать</button>
+    </div>
+</form>
+
+<div class="list-group">
+    {% for task in tasks %}
+    <div class="list-group-item">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">
+                {% if task.is_completed %}
+                <s>{{ task.title }}</s>
+                {% else %}
+                {{ task.title }}
+                {% endif %}
+            </h5>
+            <small>{{ task.created_at|date:"d.m.Y H:i" }}</small>
+        </div>
+        <p class="mb-1">{{ task.description }}</p>
+        <small>Автор: {{ task.author_name }}</small>
+        <div class="mt-2">
+            <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
+            <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-outline-danger">Удалить</a>
+        </div>
+    </div>
+    {% empty %}
+    <div class="list-group-item">
+        Нет задач. Создайте первую задачу!
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
