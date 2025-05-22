@@ -4,7 +4,7 @@ from .models import Task
 class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
-        fields = ['author_name', 'title', 'description', 'is_completed']
+        fields = ['author_name', 'title', 'description', 'image', 'is_completed']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 4}),
         }
