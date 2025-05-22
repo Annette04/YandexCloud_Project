@@ -1,10 +1,10 @@
 from django.db import models
 
 class Task(models.Model):
-    objects = None
     author_name = models.CharField(max_length=100, verbose_name="Имя автора")
     title = models.CharField(max_length=200, verbose_name="Заголовок задачи")
     description = models.TextField(verbose_name="Описание задачи")
+    image = models.ImageField(upload_to='task_images/', null=True, blank=True, verbose_name="Изображение")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
     is_completed = models.BooleanField(default=False, verbose_name="Выполнено")
