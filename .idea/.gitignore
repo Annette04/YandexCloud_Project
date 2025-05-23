@@ -1,3 +1,31 @@
 # Default ignored files
 /shelf/
 /workspace.xml
+
+# IDE-specific
+.idea/
+*.iml
+
+# Terraform files
+**/.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+.terraform.lock.hcl
+
+# Crash log files
+crash.log
+
+# Ignore override files as they are usually used to override resources locally
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Local .terraform directories
+**/.terraform/*
+
+# CLI configuration files
+.terraformrc
+terraform.rc
