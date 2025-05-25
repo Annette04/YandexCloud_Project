@@ -12,7 +12,7 @@ resource "yandex_storage_bucket" "images" {
   acl    = "private"
 }
 
-resource "yandex_storage_bucket_iam_binding" "editor" {
+resource "yandex_storage_bucket_iam_member" "editor" {
   bucket = yandex_storage_bucket.images.bucket
   role   = "storage.editor"
   members = [
