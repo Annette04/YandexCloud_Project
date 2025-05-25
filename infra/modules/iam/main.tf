@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+}
+
 resource "yandex_iam_service_account" "this" {
   name = var.service_account_name
 }
