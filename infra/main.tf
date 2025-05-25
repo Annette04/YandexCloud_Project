@@ -66,7 +66,5 @@ module "object_storage" {
   source                 = "./modules/object_storage"
   folder_id              = var.yc_folder_id
   bucket_name            = "alm-image-storage-bucket1"
-  cloud_function_sa_id   = module.cloud_function_sa.service_account_id
-  app_server_sa_id       = module.app_server_sa.service_account_id
 }
 
