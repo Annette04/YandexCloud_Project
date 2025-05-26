@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+}
+
 resource "yandex_mdb_postgresql_cluster" "notes_db_cluster" {
   name        = var.cluster_name
   environment = "PRODUCTION"
