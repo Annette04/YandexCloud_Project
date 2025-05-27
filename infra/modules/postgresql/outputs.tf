@@ -10,12 +10,12 @@ output "notes_db_cluster_name" {
 
 output "notes_db_name" {
   description = "Имя базы данных"
-  value       = yandex_mdb_postgresql_cluster.notes_db_cluster.database[0].name
+  value       = yandex_mdb_postgresql_database.notes_db.name
 }
 
 output "notes_db_user_name" {
   description = "Имя пользователя базы данных"
-  value       = yandex_mdb_postgresql_cluster.notes_db_cluster.user[0].name
+  value       = yandex_mdb_postgresql_user.django_user.name
 }
 
 output "notes_db_host_fqdns" {

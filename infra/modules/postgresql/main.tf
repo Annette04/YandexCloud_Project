@@ -50,15 +50,14 @@ resource "yandex_mdb_postgresql_user" "django_user" {
   name       = "django_user"
   password   = var.user_db_pass
 }
+resource "yandex_mdb_postgresql_user" "postgres" {
+  cluster_id = yandex_mdb_postgresql_cluster.notes_db_cluster.id
+  name       = "postgres"
+  password   = var.postgres_admin_pass
+}
 
 resource "yandex_mdb_postgresql_database" "notes_db" {
   cluster_id = yandex_mdb_postgresql_cluster.notes_db_cluster.id
   name       = "notes_db"
   owner      = yandex_mdb_postgresql_user.django_user.name
-}
-
-resource "yandex_mdb_postgresql_user" "postgres" {
-  cluster_id = yandex_mdb_postgresql_cluster.notes_db_cluster.id
-  name       = "postgres"
-  password   = var.postgres_admin_pass
 }
