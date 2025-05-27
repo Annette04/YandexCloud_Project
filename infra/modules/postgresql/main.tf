@@ -14,12 +14,9 @@ resource "yandex_mdb_postgresql_cluster" "notes_db_cluster" {
   config {
     version = "16"  # Версия PostgreSQL
     postgresql_config = {
-      admin_password = var.postgres_admin_pass
       max_connections                   = 200
       enable_parallel_hash              = true
       vacuum_cost_limit                 = 2000
-      default_transaction_isolation     = "READ COMMITTED"
-      shared_preload_libraries          = "pg_stat_statements, auto_explain"
     }
     resources {
       resource_preset_id = "s3-c2-m8"  # Intel Ice Lake, 2 vCPU, 8 ГБ RAM
@@ -58,4 +55,10 @@ resource "yandex_mdb_postgresql_database" "notes_db" {
   cluster_id = yandex_mdb_postgresql_cluster.notes_db_cluster.id
   name       = "notes_db"
   owner      = yandex_mdb_postgresql_user.django_user.name
+}
+
+resource "yandex_mdb_postgresql_user" "postgres" {
+  cluster_id = yandex_mdb_postgresql_cluster.notes_db_cluster.id
+  name       = "postgres"
+  password   = var.postgres_admin_pass
 }
