@@ -13,9 +13,8 @@ resource "yandex_mdb_postgresql_cluster" "notes_db_cluster" {
 
   config {
     version = "16"  # Версия PostgreSQL
-    admin_password = var.postgres_admin_pass
-
     postgresql_config = {
+      admin_password = var.postgres_admin_pass
       max_connections                   = 200
       enable_parallel_hash              = true
       vacuum_cost_limit                 = 2000
