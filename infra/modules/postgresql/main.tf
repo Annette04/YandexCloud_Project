@@ -45,18 +45,17 @@ resource "yandex_mdb_postgresql_cluster" "notes_db_cluster" {
     assign_public_ip = false
   }
 
-  user {
-    name     = "django_user"
-    password = var.user_db_pass
-    permission {
-      database_name = "notes_db"
-    }
-  }
-
-  database {
-    name  = "notes_db"
-    owner = "django_user"
-  }
-
   deletion_protection = false  # после тестов включить true
+}
+
+resource "yandex_mdb_postgresql_user" "django_user" {
+  cluster_id = yandex_mdb_postgresql_cluster.notes_db_cluster.id
+  name       = "django_user"
+  password   = var.user_db_pass
+}
+
+resource "yandex_mdb_postgresql_database" "notes_db" {
+  cluster_id = yandex_mdb_postgresql_cluster.notes_db_cluster.id
+  name       = "notes_db"
+  owner      = yandex_mdb_postgresql_user.django_user.name
 }
