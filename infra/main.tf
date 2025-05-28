@@ -68,7 +68,7 @@ module "object_storage" {
   bucket_name            = "alm-image-storage-bucket1"
 }
 
- База данных
+# База данных
 module "notes_db_cluster" {
   source = "./modules/postgresql"  # путь к модулю
   cluster_name      = "notes-db-cluster"
