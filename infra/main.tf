@@ -32,7 +32,11 @@ module "admin_sa" {
   }
   folder_id            = var.yc_folder_id
   service_account_name = "admin-sa"
-  roles                = ["editor"]
+  roles                = [
+    "editor",
+    "mdb.admin",
+    "serverless.functions.admin",
+  ]
 }
 
 module "app_server_sa" {
@@ -44,8 +48,7 @@ module "app_server_sa" {
   service_account_name = "app-server-sa"
   roles                = [
     "storage.editor",
-    "mdb.admin",
-    "serverless.functions.invoker"
+    "logging.writer"
   ]
 }
 
@@ -57,7 +60,9 @@ module "cloud_function_sa" {
   folder_id            = var.yc_folder_id
   service_account_name = "cloud-function-sa"
   roles                = [
-    "storage.editor"
+    "storage.editor",
+    "serverless.functions.invoker",
+    "logging.writer"
   ]
 }
 
