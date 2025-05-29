@@ -43,6 +43,13 @@ resource "yandex_mdb_postgresql_cluster" "notes_db_cluster" {
   }
 
   deletion_protection = false  # после тестов включить true
+
+  lifecycle {
+    ignore_changes = [
+      host,
+      maintenance_window
+    ]
+  }
 }
 
 resource "yandex_mdb_postgresql_user" "django_user" {
