@@ -6,7 +6,6 @@ terraform {
   }
 }
 
-
 resource "yandex_compute_instance" "default" {
   name        = var.vm_name
   folder_id   = var.folder_id
@@ -28,13 +27,7 @@ resource "yandex_compute_instance" "default" {
 
   network_interface {
     subnet_id = var.subnet_id
-
-    dynamic "nat" {
-      for_each = var.public_ip ? [1] : []
-      content {
-        ip_version = "ipv4"
-      }
-    }
+    nat       = var.public_ip ? true : false
   }
 
   metadata = {
