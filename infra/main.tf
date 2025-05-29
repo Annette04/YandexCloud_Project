@@ -71,8 +71,23 @@ module "object_storage" {
   source                 = "./modules/object_storage"
   folder_id              = var.yc_folder_id
   bucket_name            = "alm-image-storage-bucket1"
+  service_account_id = module.cloud_function_sa.service_account_id
 }
 
+module "image_preview_function" {
+  source             = "./modules/cloud_functions"
+  function_name      = "image-preview"
+  service_account_id = module.cloud_function_sa.service_account_id
+  bucket_name        = module.object_storage.bucket_name
+  storage_access_key = module.object_storage.access_key
+  storage_secret_key = module.object_storage.secret_key
+  max_image_size     = 10485760 # 10MB
+
+  depends_on = [
+    module.object_storage,
+    module.cloud_function_sa
+  ]
+}
 # База данных
 module "notes_db_cluster" {
   source = "./modules/postgresql"  # путь к модулю
