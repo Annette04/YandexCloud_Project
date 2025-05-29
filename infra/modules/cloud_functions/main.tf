@@ -7,7 +7,7 @@ terraform {
   }
 }
 
-resource "yandex_serverless_function" "this" {
+resource "yandex_function" "this" {
   name               = var.function_name
   description        = "Image preview and processing function"
   runtime            = "python39"
