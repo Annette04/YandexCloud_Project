@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+    }
+  }
+}
+
+
 resource "yandex_compute_instance" "default" {
   name        = var.vm_name
   folder_id   = var.folder_id
