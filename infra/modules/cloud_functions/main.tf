@@ -10,6 +10,7 @@ terraform {
 resource "yandex_function" "this" {
   name               = var.function_name
   description        = "Image preview and processing function"
+  user_hash          = filesha256("${path.module}/function/function.zip")
   runtime            = "python39"
   entrypoint         = "main.handler"
   memory             = 512

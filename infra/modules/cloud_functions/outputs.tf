@@ -3,5 +3,5 @@ output "function_id" {
 }
 
 output "function_url" {
-  value = "https://functions.yandexcloud.net/${yandex_serverless_function.this.id}"
+  value = "https://functions.yandexcloud.net/${yandex_function.this.id}"
 }
