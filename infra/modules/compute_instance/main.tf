@@ -32,6 +32,7 @@ resource "yandex_compute_instance" "default" {
 
   metadata = {
     ssh-keys = "ubuntu:${var.ssh_key}"
+    serial-port-enable = "1"
   }
 }
 
