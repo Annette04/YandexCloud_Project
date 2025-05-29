@@ -6,7 +6,7 @@ terraform {
   }
 }
 
-resource "yandex_storage_bucket" "images" {
+resource "yandex_storage_bucket_rebak" "images" {
   bucket = var.bucket_name
   folder_id = var.folder_id
   acl    = "private"
