@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    yandex = {
+      source = "yandex-cloud/yandex"
+      version = "1.6.0"
+    }
+  }
+}
+
 resource "yandex_serverless_function" "this" {
   name               = var.function_name
   description        = "Image preview and processing function"
