@@ -1,5 +1,5 @@
 output "function_id" {
-  value = yandex_serverless_function.this.id
+  value = yandex_function.this.id
 }
 
 output "function_url" {
