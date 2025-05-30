@@ -109,11 +109,10 @@ resource "yandex_compute_instance" "app" {
 }
 
 module "load_balancer" {
-  source             = "./modules/load_balancer"
-  lb_name           = "web-app-lb"
-  region            = var.yc_region
-  listener_port     = 80
-  health_check_path = "/healthz"
+  source           = "./modules/load_balancer"
+  lb_name          = "app-lb"
+  region           = var.yc_region
+  health_check_path = "/health/"
 
   target_instances = [
     for vm in yandex_compute_instance.app : {
