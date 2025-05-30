@@ -25,3 +25,9 @@ variable "yc_zone" {
   type        = string
   default     = "ru-central1-a"
 }
+
+variable "yc_region" {
+  description = "Yandex Cloud region"
+  type        = string
+  default     = "ru-central1"
+}

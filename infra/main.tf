@@ -83,3 +83,24 @@ module "image_preview_function" {
     module.cloud_function_sa
   ]
 }
+
+module "load_balancer" {
+  source           = "./modules/load_balancer"
+  lb_name          = "app-lb"
+  region           = var.yc_region
+  health_check_path = "/health/"
+  target_instances = [
+    {
+      subnet_id = module.network.public_subnet_id
+      address   = yandex_compute_instance.app[0].network_interface[0].ip_address
+    },
+    {
+      subnet_id = module.network.public_subnet_id
+      address   = yandex_compute_instance.app[1].network_interface[0].ip_address
+    }
+  ]
+
+  depends_on = [
+    yandex_compute_instance.app
+  ]
+}
