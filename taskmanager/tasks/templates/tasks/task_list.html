@@ -26,6 +26,13 @@
             <small>{{ task.created_at|date:"d.m.Y H:i" }}</small>
         </div>
         <p class="mb-1">{{ task.description }}</p>
+
+        {% if task.image %}
+        <div class="mt-2 mb-2">
+            <img src="{{ task.image.url }}" alt="Task image" style="max-height: 200px;" class="img-thumbnail">
+        </div>
+        {% endif %}
+
         <small>Автор: {{ task.author_name }}</small>
         <div class="mt-2">
             <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-outline-secondary">Редактировать</a>
@@ -38,4 +45,32 @@
     </div>
     {% endfor %}
 </div>
+
+{% if page_obj.has_other_pages %}
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-4">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if author_name %}&author_name={{ author_name }}{% endif %}">Предыдущая</a>
+        </li>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% else %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}{% if author_name %}&author_name={{ author_name }}{% endif %}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if author_name %}&author_name={{ author_name }}{% endif %}">Следующая</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
 {% endblock %}
