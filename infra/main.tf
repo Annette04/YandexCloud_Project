@@ -104,7 +104,7 @@ module "app_instance" {
   folder_id          = var.yc_folder_id
   subnet_id          = module.network.private_subnet_id
   service_account_id = module.app_server_sa.service_account_id
-  vm_name            = "django-app"
+  vm_name            = "django-app2"
   ssh_key            = file("~/.ssh/authorized_keys")
   public_ip          = true
 }
