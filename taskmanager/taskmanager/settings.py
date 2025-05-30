@@ -82,6 +82,10 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', '6432'),
+        'OPTIONS': {
+            'sslmode': 'verify-full',
+            'sslrootcert': '/etc/ssl/certs/ca-certificates.crt',
+        }
     }
 }
 
