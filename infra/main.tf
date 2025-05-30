@@ -84,23 +84,46 @@ module "image_preview_function" {
   ]
 }
 
+resource "yandex_compute_instance" "app" {
+  count = 2
+
+  name        = "app-vm-${count.index}"
+  platform_id = "standard-v3"
+  zone        = var.yc_zone
+
+  resources {
+    cores  = 2
+    memory = 2
+  }
+
+  boot_disk {
+    initialize_params {
+      image_id = "fd87va5cc00gaq2f5qfb" # Ubuntu 20.04
+    }
+  }
+
+  network_interface {
+    subnet_id = module.network.public_subnet_id
+    nat       = true
+  }
+}
+
 module "load_balancer" {
-  source           = "./modules/load_balancer"
-  lb_name          = "app-lb"
-  region           = var.yc_region
-  health_check_path = "/health/"
+  source             = "./modules/load_balancer"
+  lb_name           = "web-app-lb"
+  region            = var.yc_region
+  listener_port     = 80
+  health_check_path = "/healthz"
+
   target_instances = [
-    {
+    for vm in yandex_compute_instance.app : {
       subnet_id = module.network.public_subnet_id
-      address   = yandex_compute_instance.app[0].network_interface[0].ip_address
-    },
-    {
-      subnet_id = module.network.public_subnet_id
-      address   = yandex_compute_instance.app[1].network_interface[0].ip_address
+      address   = vm.network_interface[0].ip_address
     }
   ]
 
   depends_on = [
-    yandex_compute_instance.app
+    yandex_compute_instance.app,
+    module.network
   ]
 }
