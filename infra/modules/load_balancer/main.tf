@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    yandex = {
+      source  = "yandex-cloud/yandex"
+      version = "~> 0.140"
+    }
+  }
+}
+
 resource "yandex_lb_network_load_balancer" "main" {
   name = var.lb_name
 
