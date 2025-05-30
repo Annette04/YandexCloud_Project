@@ -98,7 +98,7 @@ resource "yandex_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      image_id = "fd87va5cc00gaq2f5qfb" # Ubuntu 20.04
+      image_id = "fd81n37q9kgufk6rb4c0" # Ubuntu 20.04
     }
   }
 
