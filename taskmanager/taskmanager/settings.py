@@ -19,6 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+# Загружает переменные из .env
+load_dotenv()
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
@@ -74,8 +77,7 @@ WSGI_APPLICATION = 'taskmanager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# Загружает переменные из .env
-load_dotenv()
+
 
 DATABASES = {
     'default': {
@@ -86,8 +88,7 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', '6432'),
         'OPTIONS': {
-            'sslmode': 'verify-full',
-            'sslrootcert': '/etc/ssl/certs/ca-certificates.crt',
+            'sslmode': 'require',
         }
     }
 }
