@@ -88,15 +88,15 @@ module "image_preview_function" {
     module.cloud_function_sa
   ]
 }
-## База данных
-#module "notes_db_cluster" {
-#  source = "./modules/postgresql"  # путь к модулю
-#  cluster_name      = "notes-db-cluster"
-#  network_id        = module.network.vpc_network_id
-#  subnet_id = module.network.public_subnet_id
-#  user_db_pass      = var.user_db_pass
-#  postgres_admin_pass    = var.postgres_admin_pass
-#}
+# База данных
+module "notes_db_cluster" {
+  source = "./modules/postgresql"  # путь к модулю
+  cluster_name      = "notes-db-cluster"
+  network_id        = module.network.vpc_network_id
+  subnet_id = module.network.public_subnet_id
+  user_db_pass      = var.user_db_pass
+  postgres_admin_pass    = var.postgres_admin_pass
+}
 
 ## VM для хостинга
 #module "app_instance" {
