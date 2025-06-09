@@ -93,18 +93,18 @@ module "notes_db_cluster" {
   source = "./modules/postgresql"  # путь к модулю
   cluster_name      = "notes-db-cluster"
   network_id        = module.network.vpc_network_id
-  private_subnet_id = module.network.private_subnet_id
+  subnet_id = module.network.public_subnet_id
   user_db_pass      = var.user_db_pass
   postgres_admin_pass    = var.postgres_admin_pass
 }
 
-# VM для хостинга
-module "app_instance" {
-  source             = "./modules/compute_instance"
-  folder_id          = var.yc_folder_id
-  subnet_id          = module.network.private_subnet_id
-  service_account_id = module.app_server_sa.service_account_id
-  vm_name            = "django-app"
-  ssh_key            = file("~/.ssh/authorized_keys")
-  public_ip          = true
-}
+## VM для хостинга
+#module "app_instance" {
+#  source             = "./modules/compute_instance"
+#  folder_id          = var.yc_folder_id
+#  subnet_id          = module.network.private_subnet_id
+#  service_account_id = module.app_server_sa.service_account_id
+#  vm_name            = "django-app"
+#  ssh_key            = file("~/.ssh/authorized_keys")
+#  public_ip          = true
+#}

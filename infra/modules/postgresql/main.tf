@@ -32,24 +32,11 @@ resource "yandex_mdb_postgresql_cluster" "notes_db_cluster" {
 
   host {
     zone             = "ru-central1-a"
-    subnet_id        = var.private_subnet_id  # ID подсети private_subnet
-    assign_public_ip = false  # Без публичного IP
-  }
-
-  host {
-    zone             = "ru-central1-a"
-    subnet_id        = var.private_subnet_id
-    assign_public_ip = false
+    subnet_id        = var.subnet_id  # ID подсети private_subnet
+    assign_public_ip = true
   }
 
   deletion_protection = false  # после тестов включить true
-
-  lifecycle {
-    ignore_changes = [
-      host,
-      maintenance_window
-    ]
-  }
 }
 
 resource "yandex_mdb_postgresql_user" "django_user" {

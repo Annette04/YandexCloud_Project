@@ -3,8 +3,8 @@ variable "network_id" {
   type        = string
 }
 
-variable "private_subnet_id" {
-  description = "ID подсети private_subnet"
+variable "subnet_id" {
+  description = "ID подсети public_subnet"
   type        = string
 }
 
